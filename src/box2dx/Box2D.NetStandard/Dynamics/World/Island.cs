@@ -215,8 +215,9 @@ namespace Box2D.NetStandard.Dynamics.World
                 if (b.m_type == BodyType.Dynamic)
                 {
                     // Integrate velocities.
-                    v += h * b.m_invMass * (b.m_gravityScale * b.m_mass * gravity + b.m_force);
-                    w += h * b.m_invI * b.m_torque;
+                    // FIX - removed multiply by delta as this is done with the positions later
+                    v += b.m_invMass * (b.m_gravityScale * b.m_mass * gravity + b.m_force);
+                    w += b.m_invI * b.m_torque;
 
                     // Apply damping.
                     // ODE: dv/dt + c * v = 0
